@@ -1,138 +1,298 @@
 # 📚 Documentation Index
 
-Welcome to the NEXATHON 2025 documentation! This folder contains all the project documentation files.
+Welcome to the NEXATHON 2026 documentation! **Version 2.0** with centralized data management.
 
-## 📖 Documentation Files
+## 🚀 Start Here
 
-### 📕 [Main README](../README.md)
-**Location:** `/README.md` (project root)  
-The main project documentation with overview, setup instructions, and quick start guide.
+### New to the Project?
+
+1. **[Quick Start Guide](QUICK_START.md)** ⭐  
+   Get up and running in 5 minutes
+
+2. **[Handover Documentation](HANDOVER.md)**  
+   Complete project overview and what's new in v2.0
+
+### Making Changes?
+
+1. **[Data Management Guide](../lib/DATA_README.md)** 📊  
+   How to update website content (NEW in v2.0!)
+
+2. **[Contributing Guidelines](CONTRIBUTING.md)**  
+   How to contribute code
 
 ---
 
-### 📘 [Architecture Guide](./ARCHITECTURE.md)
-**Purpose:** Technical architecture and design decisions  
-**Best for:** Understanding system design, component patterns, and technical implementation
+## 📖 All Documentation
 
-**Contents:**
-- System architecture overview
-- Component hierarchy and patterns
-- State management strategy
-- Visual effects system
+### 📕 [Quick Start Guide](QUICK_START.md)
+**For:** Everyone  
+**Time:** 5-10 minutes
+
+**What you'll learn:**
+- What changed in v2.0
+- How to update content
+- How to use the theme toggle
+- Common tasks
+
+---
+
+### 📘 [Handover Documentation](HANDOVER.md)
+**For:** Developers, Maintainers  
+**Time:** 15-20 minutes
+
+**What's included:**
+- v2.0 changes and migration guide
+- **Data management system** (most important!)
+- Project structure
+- Tech stack
+- Common tasks
+- Troubleshooting
+- Deployment guide
+
+---
+
+### 📗 [Contributing Guidelines](CONTRIBUTING.md)
+**For:** Contributors  
+**Time:** 10-15 minutes
+
+**What's covered:**
+- Setup instructions
+- **Content update workflow (v2.0)**
+- Coding standards
+- Component guidelines
+- Commit conventions
+- PR process
+
+---
+
+### 📙 [Architecture Guide](ARCHITECTURE.md)
+**For:** Advanced developers  
+**Time:** 20-30 minutes
+
+**Deep dive into:**
+- System architecture
+- Component patterns
+- Animation system
 - Performance optimizations
-- SEO and accessibility features
-- Future enhancements roadmap
+- SEO and accessibility
 
 ---
 
-### 📗 [Contributing Guidelines](./CONTRIBUTING.md)
-**Purpose:** Guide for contributors  
-**Best for:** Anyone wanting to contribute to the project
+### 📊 [Data Management Guide](../lib/DATA_README.md)
+**For:** Content managers, Developers  
+**Time:** 10-15 minutes  
+**Location:** `lib/DATA_README.md`
 
-**Contents:**
-- Code of conduct
-- Development workflow
-- Coding standards (TypeScript, React, styling)
-- Component creation guidelines
-- Commit message conventions
-- Pull request process
-- Bug reporting and feature requests
+**Essential reading for v2.0:**
+- How to update all website content
+- Data structure reference
+- Examples and best practices
+- Common tasks
 
 ---
 
-### 📙 [Handover Documentation](./HANDOVER.md)
-**Purpose:** Comprehensive component and feature documentation  
-**Best for:** Detailed understanding of each component and feature
+### 📄 [Quick Reference](QUICK_REFERENCE.md)
+**For:** Daily development  
+**Time:** 5 minutes
 
-**Contents:**
-- Complete project overview
-- Tech stack with detailed explanations
-- Every component documented
-- Styling system breakdown
-- Special features and animations
-- Configuration files explained
-- Troubleshooting guide
+**Quick lookup for:**
+- Commands
+- File locations
+- Design tokens
+- Common patterns
 
 ---
 
-### 📓 [Quick Reference](./QUICK_REFERENCE.md)
-**Purpose:** Fast lookup guide for developers  
-**Best for:** Daily development tasks and quick answers
+## 🎯 Find What You Need
 
-**Contents:**
-- Quick start commands
-- Common development tasks
-- Design system reference (colors, fonts, breakpoints)
-- Component directory
-- Import patterns
-- Available animations
-- Troubleshooting tips
+### I want to...
 
----
-
-### 📔 [Restructuring Summary](./RESTRUCTURING_SUMMARY.md)
-**Purpose:** Documentation of the project restructuring  
-**Best for:** Understanding what changed and why
-
-**Contents:**
-- Summary of organizational changes
-- Before/after comparison
-- Benefits of new structure
-- Migration guide
+| Task | Go to |
+|------|-------|
+| **Update website content** | [`lib/DATA_README.md`](../lib/DATA_README.md) ⭐ |
+| Get started quickly | [Quick Start](QUICK_START.md) |
+| Understand the project | [Handover](HANDOVER.md) |
+| Contribute code | [Contributing](CONTRIBUTING.md) |
+| Change theme colors | [Architecture](ARCHITECTURE.md) → Styling |
+| Add a new section | [Contributing](CONTRIBUTING.md) → Adding Content |
+| Deploy the site | [Handover](HANDOVER.md) → Deployment |
+| Fix a bug | [Contributing](CONTRIBUTING.md) |
+| Understand architecture | [Architecture](ARCHITECTURE.md) |
 
 ---
 
-### 📄 [Project Structure Diagram](./PROJECT_STRUCTURE.txt)
-**Purpose:** Visual representation of project structure  
-**Best for:** Quick visualization of folder organization
+## 🆕 What's New in v2.0
 
-**Contents:**
-- ASCII tree diagram
-- Component flow visualization
-- Import patterns
-- File count summary
+### Major Changes (December 2025)
+
+1. **Centralized Data Management** 📊
+   - All content in `lib/data.tsx`
+   - Update once, changes everywhere
+   - See [Data Guide](../lib/DATA_README.md)
+
+2. **New Theme System** 🎨
+   - Black-White-Blue color scheme
+   - Dark/Light mode toggle
+   - Smoother animations
+
+3. **Improved Documentation** 📚
+   - Simplified structure
+   - Focus on practical tasks
+   - Better quick start
+
+### Removed/Archived
+
+- ❌ `RESTRUCTURING_SUMMARY.md` (merged into Handover)
+- ❌ Old version-specific docs (outdated)
 
 ---
 
-## 🗺️ Documentation Roadmap
+## 📝 Documentation Structure
+
+```
+docs/
+├── README.md              # This file - Documentation index
+├── QUICK_START.md         # 🆕 5-minute setup guide
+├── HANDOVER.md            # ✨ Updated: Complete project guide
+├── CONTRIBUTING.md        # ✨ Updated: Contribution guidelines
+├── ARCHITECTURE.md        # Technical deep dive
+├── QUICK_REFERENCE.md     # Quick lookup reference
+└── PROJECT_STRUCTURE.txt  # File tree visualization
+
+lib/
+└── DATA_README.md         # 🆕 Data management guide
+```
+
+**Legend:**
+- 🆕 = New in v2.0
+- ✨ = Updated for v2.0
+
+---
+
+## 🎓 Learning Path
+
+### For Content Managers
+
+1. [Quick Start](QUICK_START.md) → Content Updates section
+2. [Data Guide](../lib/DATA_README.md) → Complete reference
+3. Practice: Update event date in `lib/data.tsx`
 
 ### For New Developers
-1. Start with [Main README](../README.md) for project overview
-2. Read [Quick Reference](./QUICK_REFERENCE.md) for development basics
-3. Review [Architecture Guide](./ARCHITECTURE.md) for technical understanding
-4. Check [Handover Documentation](./HANDOVER.md) for component details
 
-### For Contributors
-1. Read [Contributing Guidelines](./CONTRIBUTING.md) first
-2. Reference [Quick Reference](./QUICK_REFERENCE.md) for coding patterns
-3. Follow [Architecture Guide](./ARCHITECTURE.md) for design patterns
+1. [Quick Start](QUICK_START.md) → Full guide
+2. [Handover](HANDOVER.md) → What's New + Data Management
+3. [Contributing](CONTRIBUTING.md) → Setup and standards
+4. [Architecture](ARCHITECTURE.md) → When you need deep understanding
 
-### For Maintainers
-1. Keep [Handover Documentation](./HANDOVER.md) updated
-2. Update [Architecture Guide](./ARCHITECTURE.md) for major changes
-3. Maintain [Quick Reference](./QUICK_REFERENCE.md) accuracy
+### For Experienced Contributors
+
+1. [Handover](HANDOVER.md) → v2.0 Changes
+2. [Data Guide](../lib/DATA_README.md) → New data system
+3. [Contributing](CONTRIBUTING.md) → Updated workflows
 
 ---
 
-## 📝 Documentation Standards
+## 💡 Pro Tips
 
-All documentation follows:
-- **Markdown format** for easy reading and editing
-- **Clear headings** for navigation
-- **Code examples** where applicable
-- **Visual aids** (diagrams, tables) for clarity
-- **Up-to-date** information (last updated: December 22, 2025)
+### Finding Information Fast
+
+1. **Use your editor's search** (Ctrl+F / Cmd+F)
+2. **Check the "I want to..." table** above
+3. **Start with Quick Start** for common tasks
+
+### Keeping Documentation Updated
+
+When you make significant changes:
+1. Update relevant doc file
+2. Note it in your PR description
+3. Update this index if adding new docs
+
+### Best Practices
+
+- ✅ Read Quick Start first
+- ✅ Use Data Guide for content updates
+- ✅ Check existing docs before asking
+- ✅ Contribute back (fix typos, add examples)
 
 ---
 
-## 🔗 Quick Links
+## 📞 Getting Help
 
-- [Main Project README](../README.md)
-- [Contributing Guidelines](./CONTRIBUTING.md)
-- [Quick Reference](./QUICK_REFERENCE.md)
-- [Architecture](./ARCHITECTURE.md)
-- [Component Docs](./HANDOVER.md)
+### Documentation Issues
+
+- **Unclear instructions?** Open an issue
+- **Found a typo?** Submit a PR
+- **Need more examples?** Request in discussions
+
+### Quick Answers
+
+Most common questions:
+
+**Q: How do I update the event date?**  
+A: Edit `eventInfo.date` in `lib/data.tsx`
+
+**Q: How do I add a sponsor?**  
+A: See [Data Guide](../lib/DATA_README.md) → Adding Sponsors
+
+**Q: How do I change colors?**  
+A: Edit `app/globals.css` (see [Handover](HANDOVER.md))
+
+**Q: Where are the images?**  
+A: In `/public/logos/` and `/public/gallery/`
 
 ---
 
-**Need help?** Open an issue on GitHub or refer to the appropriate documentation file above.
+## 🎯 Documentation Goals
+
+Our documentation aims to be:
+
+- **Accessible** - Easy for beginners
+- **Comprehensive** - Covers all features
+- **Practical** - Focus on real tasks
+- **Up-to-date** - Reflects current code
+- **Searchable** - Easy to find info
+
+---
+
+## 📈 Version History
+
+| Version | Date | Major Changes |
+|---------|------|---------------|
+| 2.0.0 | Dec 2025 | Centralized data, new theme, dark mode |
+| 1.0.0 | Earlier | Initial release |
+
+---
+
+## 🤝 Contributing to Docs
+
+Documentation improvements are always welcome!
+
+**To improve docs:**
+
+1. Make your changes
+2. Test that links work
+3. Submit PR with clear description
+4. Tag with `documentation` label
+
+**Good documentation PRs:**
+- Fix typos and grammar
+- Add missing examples
+- Clarify confusing sections
+- Add helpful diagrams
+- Update outdated information
+
+---
+
+## ✨ Key Takeaway
+
+> **For v2.0, the #1 thing to know:**  
+> All website content is in `lib/data.tsx`  
+> Everything else is for advanced customization!
+
+---
+
+**Happy coding!** 🚀
+
+**Version:** 2.0.0  
+**Last Updated:** December 22, 2025  
+**Maintained By:** NEXATHON Team

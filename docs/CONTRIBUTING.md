@@ -1,349 +1,524 @@
-# Contributing to NEXATHON 2025
+# Contributing to NEXATHON 2026
 
-Thank you for your interest in contributing to NEXATHON 2025! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to NEXATHON 2026! This guide will help you get started.
 
 ## 📋 Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
 - [Getting Started](#getting-started)
-- [Development Workflow](#development-workflow)
+- [Content Updates](#content-updates-v20)
+- [Code Contributions](#code-contributions)
 - [Coding Standards](#coding-standards)
-- [Component Guidelines](#component-guidelines)
-- [Commit Messages](#commit-messages)
+- [Commit Guidelines](#commit-guidelines)
 - [Pull Request Process](#pull-request-process)
-- [Reporting Bugs](#reporting-bugs)
-- [Feature Requests](#feature-requests)
 
-## Code of Conduct
-
-This project adheres to a code of conduct. By participating, you are expected to uphold this code. Please be respectful and professional in all interactions.
+---
 
 ## Getting Started
 
-1. **Fork the repository** on GitHub
-2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/Nexathon-26.git
-   cd Nexathon-26
-   ```
-3. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
-4. **Create a branch** for your feature or fix:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+### Prerequisites
 
-## Development Workflow
+- Node.js 18+ and npm/pnpm
+- Git
+- Code editor (VS Code recommended)
 
-### Running the Development Server
+### Setup
 
+1. **Fork and clone:**
 ```bash
-pnpm dev
+git clone https://github.com/YOUR_USERNAME/Nexathon-26.git
+cd Nexathon-26
 ```
 
-The site will be available at `http://localhost:3000`.
-
-### Building for Production
-
+2. **Install dependencies:**
 ```bash
-pnpm build
+npm install
+# or
+pnpm install
 ```
 
-### Running the Linter
-
+3. **Start development:**
 ```bash
-pnpm lint
+npm run dev
 ```
 
-### Testing Changes
+4. **Create a branch:**
+```bash
+git checkout -b feature/your-feature-name
+```
 
-Before submitting a pull request:
+---
 
-1. Test your changes thoroughly in development mode
-2. Build the project and verify it compiles without errors
-3. Check that all existing functionality still works
-4. Ensure the site is responsive across different screen sizes
-5. Test with reduced motion preferences enabled
+## Content Updates (v2.0)
 
-## Coding Standards
+### The New Way: Centralized Data
 
-### TypeScript
+**All content lives in `lib/data.tsx`** - This is the biggest change in v2.0!
 
-- Use TypeScript for all new components
-- Define proper types/interfaces for props
-- Avoid using `any` type
-- Use type inference where appropriate
+### How to Update Content
 
-```tsx
-// Good
+1. **Open** `lib/data.tsx`
+2. **Find** your section (Ctrl+F / Cmd+F)
+3. **Edit** values
+4. **Save** - Changes apply everywhere
+
+### Example: Update Event Date
+
+```typescript
+// In lib/data.tsx
+export const eventInfo = {
+  date: "March 15-17, 2026",  // ← Change this
+  // ...
+}
+```
+
+### Adding New Content
+
+**1. Add to `lib/data.tsx`:**
+```typescript
+export const newSectionData = {
+  title: "New Section",
+  items: [
+    { id: 1, text: "Item 1" },
+    { id: 2, text: "Item 2" }
+  ]
+}
+```
+
+**2. Import in component:**
+```typescript
+import { newSectionData } from "@/lib/data"
+
+export default function NewSection() {
+  return (
+    <div>
+      <h2>{newSectionData.title}</h2>
+      {newSectionData.items.map(item => (
+        <p key={item.id}>{item.text}</p>
+      ))}
+    </div>
+  )
+}
+```
+
+### Adding Images/Logos
+
+1. **Place file** in `/public/logos/` or `/public/gallery/`
+2. **Reference** in `lib/data.tsx`:
+```typescript
+logo: "/logos/company-name.svg"  // ✅ Correct
+logo: "logos/company-name.svg"   // ❌ Wrong
+```
+
+📖 **Full Guide:** See [`lib/DATA_README.md`](../lib/DATA_README.md)
+
+---
+
+## Code Contributions
+
+### Component Guidelines
+
+**1. Use centralized data:**
+
+```typescript
+// ❌ Don't hardcode content
+const sponsors = [{ name: "Company" }]
+
+// ✅ Import from lib/data.tsx
+import { sponsorsData } from "@/lib/data"
+const sponsors = sponsorsData.tiers[0].sponsors
+```
+
+**2. Use TypeScript:**
+
+```typescript
+// ✅ Good
 interface ButtonProps {
   label: string
   onClick: () => void
   variant?: 'primary' | 'secondary'
 }
 
-export default function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
-  // implementation
+export default function Button({ 
+  label, 
+  onClick, 
+  variant = 'primary' 
+}: ButtonProps) {
+  return <button onClick={onClick}>{label}</button>
 }
 
-// Avoid
+// ❌ Avoid
 export default function Button(props: any) {
-  // implementation
+  return <button>{props.label}</button>
 }
 ```
 
-### React Components
+**3. Use functional components:**
 
-- Use functional components with hooks
-- Keep components focused and single-purpose
-- Extract reusable logic into custom hooks
-- Use meaningful component and variable names
-
-```tsx
-// Good structure
-"use client" // Add only if needed
-
-import { useState, useEffect } from "react"
-import { SomeIcon } from "lucide-react"
-
-interface MyComponentProps {
-  title: string
+```typescript
+// ✅ Good
+export default function MyComponent() {
+  const [state, setState] = useState(false)
+  return <div>...</div>
 }
 
-export default function MyComponent({ title }: MyComponentProps) {
-  const [state, setState] = useState(initialValue)
-
-  useEffect(() => {
-    // side effects
-  }, [])
-
-  return (
-    <div>
-      {/* JSX */}
-    </div>
-  )
+// ❌ Avoid class components
+class MyComponent extends React.Component {
+  render() { return <div>...</div> }
 }
-```
-
-### Styling
-
-- Use Tailwind CSS utility classes
-- Follow the existing color scheme and design system
-- Use CSS variables defined in `app/globals.css` for colors
-- Maintain responsive design with Tailwind breakpoints
-
-```tsx
-// Good
-<div className="bg-background text-foreground rounded-lg p-4 hover:bg-accent transition-colors">
-  Content
-</div>
-
-// Avoid inline styles unless absolutely necessary
-<div style={{ backgroundColor: '#000' }}>
-  Content
-</div>
 ```
 
 ### File Organization
 
-Place files in the appropriate directory:
+Place files in the correct directory:
 
 ```
 components/
-├── layout/           # Navigation, footer, providers
-├── sections/         # Page sections (hero, about, etc.)
-├── features/         # Reusable features (animations, cards)
-└── ui/               # Base UI components
+├── layout/       # Navbar, Footer, ThemeProvider
+├── sections/     # Page sections (Hero, About, etc.)
+├── features/     # Reusable components (ScrollAnimation, etc.)
+└── ui/           # Base UI primitives (Button, Card, etc.)
 ```
 
-## Component Guidelines
+### Styling Guidelines
 
-### Creating a New Section Component
-
-1. Create file in `components/sections/`
-2. Follow naming convention: `section-name.tsx`
-3. Use "use client" if it needs client-side features
-4. Import shared components from features:
+**1. Use Tailwind classes:**
 
 ```tsx
-"use client"
+// ✅ Good
+<div className="px-4 py-2 bg-primary text-white rounded-lg">
+  Content
+</div>
 
-import SectionHeader from "@/components/features/section-header"
-import ScrollAnimation from "@/components/features/scroll-animation"
-import TiltCard from "@/components/features/tilt-card"
-
-export default function MySection() {
-  return (
-    <section id="my-section" className="py-20 px-4">
-      <ScrollAnimation>
-        <SectionHeader
-          title="Section Title"
-          subtitle="Section subtitle"
-          gradient
-        />
-        {/* Section content */}
-      </ScrollAnimation>
-    </section>
-  )
-}
+// ❌ Avoid inline styles
+<div style={{ padding: '8px 16px', background: 'blue' }}>
+  Content
+</div>
 ```
 
-### Creating a Reusable Feature Component
-
-1. Create file in `components/features/`
-2. Make it flexible and reusable
-3. Document props with TypeScript interfaces
+**2. Use theme colors:**
 
 ```tsx
-interface FeatureProps {
-  /**
-   * The main title of the feature
-   */
-  title: string
-  /**
-   * Optional description
-   */
-  description?: string
-  /**
-   * Additional CSS classes
-   */
-  className?: string
-}
+// ✅ Use CSS variables
+className="text-primary bg-background"
 
-export default function Feature({ title, description, className }: FeatureProps) {
-  // implementation
-}
+// ❌ Don't hardcode colors
+className="text-blue-500 bg-gray-900"
 ```
 
-## Commit Messages
+**3. Support dark mode:**
 
-Follow the conventional commits specification:
+```tsx
+// ✅ Theme-aware
+className="bg-card text-foreground border-border"
+
+// The theme system handles light/dark automatically
+```
+
+### Animation Guidelines
+
+**1. Use existing animations:**
+
+```tsx
+// Available in globals.css:
+className="glow-text"
+className="float-3d"
+className="pulse-glow"
+className="shimmer"
+```
+
+**2. Consistent timing:**
+
+```tsx
+// Use standard durations
+transition-all duration-500  // Standard
+transition-all duration-300  // Fast
+transition-all duration-1000 // Slow
+```
+
+**3. Respect reduced motion:**
+
+Animations auto-disable for users with `prefers-reduced-motion`.
+
+---
+
+## Coding Standards
+
+### TypeScript
+
+- ✅ Use explicit types for props
+- ✅ Use type inference for local variables
+- ✅ Export types when reusable
+- ❌ Avoid `any` type
+
+### React
+
+- ✅ Use functional components with hooks
+- ✅ Keep components focused (single responsibility)
+- ✅ Extract reusable logic into custom hooks
+- ✅ Use descriptive component names
+
+### Imports
+
+Use absolute imports with `@/`:
+
+```typescript
+// ✅ Good
+import { eventInfo } from "@/lib/data"
+import Button from "@/components/ui/button"
+
+// ❌ Avoid relative imports
+import { eventInfo } from "../../lib/data"
+import Button from "../ui/button"
+```
+
+### Naming Conventions
+
+- **Components:** PascalCase (`HeroSection`, `NavBar`)
+- **Files:** kebab-case (`hero-section.tsx`, `nav-bar.tsx`)
+- **Variables:** camelCase (`eventInfo`, `sponsorData`)
+- **Constants:** UPPER_CASE (`API_URL`, `MAX_COUNT`)
+
+---
+
+## Commit Guidelines
+
+### Commit Message Format
 
 ```
-<type>(<scope>): <description>
+<type>(<scope>): <subject>
 
-[optional body]
-
-[optional footer]
+<body>
 ```
 
 ### Types
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, semicolons, etc.)
-- `refactor`: Code refactoring
-- `perf`: Performance improvements
-- `test`: Adding or updating tests
-- `chore`: Build process or auxiliary tool changes
+- `feat` - New feature
+- `fix` - Bug fix
+- `docs` - Documentation only
+- `style` - Code style (formatting, no logic change)
+- `refactor` - Code restructuring
+- `perf` - Performance improvement
+- `test` - Adding tests
+- `chore` - Maintenance tasks
 
 ### Examples
 
-```
-feat(hero): add animated particle background
-
-fix(navbar): resolve mobile menu scroll issue
-
-docs(readme): update installation instructions
-
-style(components): format code with prettier
-
-refactor(sections): extract common logic to hooks
+```bash
+feat(data): add sponsors section data
+fix(navbar): theme toggle not persisting
+docs: update CONTRIBUTING.md for v2.0
+style(hero): improve animation timing
+refactor(about): migrate to centralized data
 ```
 
-## Pull Request Process
+### Best Practices
 
-1. **Update your branch** with the latest main:
-   ```bash
-   git fetch origin
-   git rebase origin/main
-   ```
-
-2. **Ensure your changes**:
-   - Build successfully (`pnpm build`)
-   - Pass linting (`pnpm lint`)
-   - Are well-tested
-   - Include necessary documentation updates
-
-3. **Create a Pull Request**:
-   - Use a clear, descriptive title
-   - Reference any related issues
-   - Provide a detailed description of changes
-   - Include screenshots for UI changes
-   - List any breaking changes
-
-4. **PR Template**:
-   ```markdown
-   ## Description
-   Brief description of changes
-
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Breaking change
-   - [ ] Documentation update
-
-   ## Testing
-   How has this been tested?
-
-   ## Screenshots (if applicable)
-   Add screenshots here
-
-   ## Checklist
-   - [ ] Code builds successfully
-   - [ ] Linting passes
-   - [ ] Responsive design maintained
-   - [ ] Accessibility considered
-   - [ ] Documentation updated
-   ```
-
-5. **Code Review**:
-   - Address reviewer feedback promptly
-   - Make requested changes in new commits
-   - Squash commits before merging if requested
-
-## Reporting Bugs
-
-When reporting bugs, please include:
-
-1. **Description**: Clear description of the bug
-2. **Steps to Reproduce**: Detailed steps to reproduce the issue
-3. **Expected Behavior**: What you expected to happen
-4. **Actual Behavior**: What actually happened
-5. **Screenshots**: If applicable
-6. **Environment**:
-   - OS and version
-   - Browser and version
-   - Node.js version
-7. **Additional Context**: Any other relevant information
-
-Use the GitHub issue template when available.
-
-## Feature Requests
-
-We welcome feature requests! Please:
-
-1. Check existing issues to avoid duplicates
-2. Provide a clear use case
-3. Describe the proposed solution
-4. Consider implementation challenges
-5. Be open to discussion and alternatives
-
-## Questions?
-
-If you have questions about contributing:
-
-- Open a GitHub issue with the "question" label
-- Check existing documentation in HANDOVER.md
-- Review closed issues and pull requests
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the same license as the project.
+- ✅ Write clear, descriptive messages
+- ✅ Use present tense ("add" not "added")
+- ✅ Keep subject line under 72 characters
+- ✅ Reference issues when applicable (`fixes #123`)
 
 ---
 
-Thank you for contributing to NEXATHON 2025! 🚀
+## Pull Request Process
+
+### Before Submitting
+
+**1. Test thoroughly:**
+- [ ] Test in both light and dark modes
+- [ ] Check mobile responsiveness
+- [ ] Verify no console errors
+- [ ] Test with slow network
+- [ ] Verify all links work
+
+**2. Code quality:**
+- [ ] Run linter: `npm run lint`
+- [ ] Build successfully: `npm run build`
+- [ ] No TypeScript errors
+- [ ] Follow coding standards
+
+**3. Documentation:**
+- [ ] Update `lib/data.tsx` if adding content
+- [ ] Add comments for complex logic
+- [ ] Update relevant docs if needed
+
+### Creating a PR
+
+1. **Push your branch:**
+```bash
+git push origin feature/your-feature-name
+```
+
+2. **Open PR on GitHub**
+
+3. **Fill out PR template:**
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Tested in light mode
+- [ ] Tested in dark mode
+- [ ] Tested on mobile
+- [ ] No console errors
+
+## Screenshots
+If applicable, add screenshots
+```
+
+4. **Wait for review**
+
+### Review Process
+
+- Maintainers will review within 2-3 days
+- Address feedback promptly
+- Once approved, PR will be merged
+
+---
+
+## Development Workflow
+
+### Daily Development
+
+```bash
+# 1. Start dev server
+npm run dev
+
+# 2. Make changes
+
+# 3. Test changes in browser
+
+# 4. Commit
+git add .
+git commit -m "feat: your feature"
+
+# 5. Push
+git push origin your-branch
+```
+
+### Common Tasks
+
+**Update content:**
+→ Edit `lib/data.tsx`
+
+**Change theme colors:**
+→ Edit `app/globals.css`
+
+**Add new section:**
+1. Create component in `components/sections/`
+2. Add data to `lib/data.tsx`
+3. Import in `app/page.tsx`
+
+**Add dependency:**
+```bash
+npm install package-name
+# or
+pnpm add package-name
+```
+
+---
+
+## Testing Guidelines
+
+### Manual Testing
+
+**Theme Testing:**
+- [ ] Toggle light/dark mode
+- [ ] Check all sections in both modes
+- [ ] Verify colors are correct
+
+**Responsiveness:**
+- [ ] Desktop (1920px)
+- [ ] Laptop (1366px)
+- [ ] Tablet (768px)
+- [ ] Mobile (375px)
+
+**Browser Testing:**
+- [ ] Chrome/Edge
+- [ ] Firefox
+- [ ] Safari (if available)
+
+### Accessibility
+
+- [ ] Keyboard navigation works
+- [ ] Screen reader friendly
+- [ ] Proper ARIA labels
+- [ ] Sufficient color contrast
+
+---
+
+## Getting Help
+
+- **Quick Start:** [`docs/QUICK_START.md`](QUICK_START.md)
+- **Data Guide:** [`lib/DATA_README.md`](../lib/DATA_README.md)
+- **Handover Doc:** [`docs/HANDOVER.md`](HANDOVER.md)
+- **Architecture:** [`docs/ARCHITECTURE.md`](ARCHITECTURE.md)
+
+---
+
+## Code of Conduct
+
+### Our Standards
+
+- ✅ Be respectful and inclusive
+- ✅ Welcome newcomers
+- ✅ Give constructive feedback
+- ✅ Focus on what's best for the project
+- ❌ No harassment or discrimination
+- ❌ No trolling or insulting comments
+
+### Enforcement
+
+Violations may result in:
+1. Warning
+2. Temporary ban
+3. Permanent ban
+
+Report issues to project maintainers.
+
+---
+
+## Quick Reference
+
+### Most Common Tasks
+
+| Task | Location |
+|------|----------|
+| Update content | `lib/data.tsx` |
+| Change colors | `app/globals.css` |
+| Add component | `components/sections/` |
+| Add documentation | `docs/` |
+
+### Key Commands
+
+```bash
+npm run dev      # Start development
+npm run build    # Build for production
+npm run lint     # Run linter
+npm run start    # Run production build
+```
+
+### Important Files
+
+- `lib/data.tsx` - All content
+- `app/globals.css` - Theme and animations
+- `app/layout.tsx` - Root layout
+- `app/page.tsx` - Main page
+
+---
+
+## 🎉 Thank You!
+
+Your contributions make NEXATHON better for everyone!
+
+**Questions?**  
+Open an issue or ask in discussions.
+
+**Version:** 2.0.0  
+**Last Updated:** December 22, 2025
