@@ -200,7 +200,12 @@ export default function HeroSection() {
             href="#about"
             onClick={(e) => {
               e.preventDefault()
-              lenis?.scrollTo("#about", { duration: 1.2 })
+              if ((lenis as any)?.scrollTo) {
+                ;(lenis as any).scrollTo("#about", { duration: 1.2 })
+              } else {
+                const target = document.getElementById("about")
+                if (target) target.scrollIntoView({ behavior: "smooth" })
+              }
             }}
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 group"
           >

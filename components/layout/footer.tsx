@@ -25,6 +25,25 @@ const footerLinks = {
 
 export default function Footer() {
   const lenis = useLenis()
+
+  // Native fallback smooth scroll (easeInOutSine)
+  const smoothScrollToTop = (duration = 1200) => {
+    const start = window.scrollY || window.pageYOffset
+    const startTime = performance.now()
+
+    const easeInOutSine = (t: number) => 0.5 - Math.cos(Math.PI * t) / 2
+
+    function step(now: number) {
+      const elapsed = now - startTime
+      const progress = Math.min(1, elapsed / duration)
+      const eased = easeInOutSine(progress)
+      const y = Math.round(start * (1 - eased))
+      window.scrollTo(0, y)
+      if (progress < 1) requestAnimationFrame(step)
+    }
+
+    requestAnimationFrame(step)
+  }
   return (
     <footer className="relative bg-card border-t border-border">
       {/* Background effects */}
@@ -38,7 +57,15 @@ export default function Footer() {
           href="#"
           onClick={(e) => {
             e.preventDefault()
-            lenis?.scrollTo(0, { duration: 1.5 })
+            if ((lenis as any)?.scrollTo) {
+              try {
+                ;(lenis as any).scrollTo(0, { duration: 2.5, easing: (t: number) => 0.5 - Math.cos(Math.PI * t) / 2 })
+              } catch {
+                ;(lenis as any).scrollTo(0, { duration: 2.5 })
+              }
+            } else {
+              smoothScrollToTop(1200)
+            }
           }}
           className="group w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] hover:-translate-y-2 hover:scale-110"
           aria-label="Back to top"
